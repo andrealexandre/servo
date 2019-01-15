@@ -168,8 +168,7 @@ impl<'a, 'tcx> LateLintPass<'a, 'tcx> for UnrootedPass {
         id: ast::NodeId,
     ) {
         let in_new_function = match kind {
-            visit::FnKind::ItemFn(n, _, _, _, _) |
-            visit::FnKind::Method(Ident { name: n, .. }, _, _, _) => {
+            visit::FnKind::ItemFn(n, _, _, _, _) | visit::FnKind::Method(n, _, _, _) => {
                 &*n.as_str() == "new" || n.as_str().starts_with("new_")
             },
             visit::FnKind::Closure(_) => return,
